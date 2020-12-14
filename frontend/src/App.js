@@ -1,19 +1,30 @@
 import './App.css';
-import React from "react"
+import React, {useRef} from "react"
 import socketClient from "socket.io-client";
-const SERVER = "http://127.0.0.1:9000";
-// import openSocket from 'socket.io-client';
-// const  socket = openSocket('http://localhost:9000');
+import Chat from "./Chat";
+import HomePage from "./HomePage";
+import { BrowserRouter, Route, Switch } from "react-router-dom";
+
 
 function App() {
-  const socket = socketClient(SERVER)
-  socket.on('connection', () => {
-    console.log(`I'm connected with the back-end`);
-  });
 
-  return (
+    return (
       <div className="App">
+          <BrowserRouter>
+              <Switch>
+                  <Route path="/" exact component={HomePage} />
+                  <Route path="/room/user=:roomID&room=:name" component={Chat} />
+                  {/*<Route path="/chat" >*/}
+                  {/*    <Chat/>*/}
+                  {/*</Route>*/}
+                  {/*<Route path="/">*/}
+                  {/*    <HomePage/>*/}
+                  {/*</Route>*/}
 
+              </Switch>
+          </BrowserRouter>
+        {/*<Chat/>*/}
+        {/*<HomePage/>*/}
       </div>
   );
 }
